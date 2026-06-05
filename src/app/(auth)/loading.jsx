@@ -1,7 +1,9 @@
+import MainLayoutLoading from "../(main)/loading";
+
 const AuthLoading = () => {
   return (
     <div>
-      <h2>auth Loading</h2>
+      <MainLayoutLoading />
     </div>
   );
 };
