@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
-import { Avatar, Button, Dropdown, Label } from "@heroui/react";
+import { Avatar } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 
@@ -20,9 +20,11 @@ const Navbar = () => {
   ];
 
   const user = true;
+  const isPending = false;
 
   return (
     <div className=" sticky top-0 z-50">
+      {/* left side */}
       <div className="w-full mx-auto px-6 py-4 flex justify-between items-center text-white">
         <div
           className="flex items-center justify-center gap-8
@@ -65,29 +67,37 @@ const Navbar = () => {
           </div>
         )}
 
-        <div className="flex items-center justify-center">
-          {user && (
-            <div className="flex items-center gap-4 mr-4 md:mr-0">
-              {/* Avatar + Dropdown */}
-              <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="cursor-pointer">
-                  <Avatar className="ring-2 ring-[#D95C78]/40 hover:ring-[#F29BAE] transition-all duration-300">
-                    <Avatar.Image
-                      alt={user?.name}
-                      src={user?.image}
-                      referrerPolicy="no-referrer"
-                    />
+        {/*desktop right side dropdown */}
+        <div>
+          {/* Loading skeleton */}
+          {isPending && (
+            <div className="h-10 w-24 animate-pulse rounded-2xl bg-muted" />
+          )}
 
-                    <Avatar.Fallback className="bg-[#D95C78] text-white font-semibold">
-                      {user?.name?.charAt(0)}
-                    </Avatar.Fallback>
-                  </Avatar>
-                </div>
+          {/* dropdown Avatar */}
+          <div className="flex items-center justify-center">
+            {user && (
+              <div className="flex items-center gap-4 mr-4 md:mr-0">
+                {/* Avatar + Dropdown */}
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} role="button" className="cursor-pointer">
+                    <Avatar className="ring-2 ring-[#D95C78]/40 hover:ring-[#F29BAE] transition-all duration-300">
+                      <Avatar.Image
+                        alt={user?.name}
+                        src={user?.image}
+                        referrerPolicy="no-referrer"
+                      />
 
-                {/* Dropdown Content */}
-                <ul
-                  tabIndex={0}
-                  className="
+                      <Avatar.Fallback className="bg-[#D95C78] text-white font-semibold">
+                        {user?.name?.charAt(0)}
+                      </Avatar.Fallback>
+                    </Avatar>
+                  </div>
+
+                  {/* Dropdown Content */}
+                  <ul
+                    tabIndex={0}
+                    className="
             dropdown-content 
             z-[100]
             mt-4
@@ -101,39 +111,39 @@ const Navbar = () => {
             border-white/10
             shadow-2xl
           "
-                >
-                  {/* User Info */}
-                  <div className="pb-4 border-b border-white/10">
-                    <div className="flex items-center gap-3">
-                      <Avatar>
-                        <Avatar.Image
-                          alt={user?.name}
-                          src={user?.image}
-                          referrerPolicy="no-referrer"
-                        />
+                  >
+                    {/* User Info */}
+                    <div className="pb-4 border-b border-white/10">
+                      <div className="flex items-center gap-3">
+                        <Avatar>
+                          <Avatar.Image
+                            alt={user?.name}
+                            src={user?.image}
+                            referrerPolicy="no-referrer"
+                          />
 
-                        <Avatar.Fallback className="bg-[#D95C78] text-white">
-                          {user?.name?.charAt(0)}
-                        </Avatar.Fallback>
-                      </Avatar>
+                          <Avatar.Fallback className="bg-[#D95C78] text-white">
+                            {user?.name?.charAt(0)}
+                          </Avatar.Fallback>
+                        </Avatar>
 
-                      <div>
-                        <h2 className="font-semibold text-[#FFF4F5]">
-                          {user?.name}
-                        </h2>
+                        <div>
+                          <h2 className="font-semibold text-[#FFF4F5]">
+                            {user?.name}
+                          </h2>
 
-                        <p className="text-sm text-[#FFF4F5]/50">
-                          {user?.email}
-                        </p>
+                          <p className="text-sm text-[#FFF4F5]/50">
+                            {user?.email}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Profile */}
-                  <li className="mt-4 list-none">
-                    <Link
-                      href="/profile"
-                      className="
+                    {/* Profile */}
+                    <li className="mt-4 list-none">
+                      <Link
+                        href="/profile"
+                        className="
                 flex
                 items-center
                 gap-3
@@ -144,45 +154,46 @@ const Navbar = () => {
                 transition-all
                 text-[#FFF4F5]
               "
-                    >
-                      <span>👤</span>
-                      <span>My Profile</span>
-                    </Link>
-                  </li>
+                      >
+                        <span>👤</span>
+                        <span>My Profile</span>
+                      </Link>
+                    </li>
 
-               
+                    {/* Logout */}
+                    <li className="mt-3 list-none">
+                      <button
+                        // onClick={handleLogout}
+                        className="  w-full  px-4 py-1 rounded  bg-[#D95C78]/35 text-[#fff] text-center py-[8.7px]  flex-1 hover:text-[#FFF4F5] hover:bg-white/5 cursor-pointer "
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
 
-                  {/* Logout */}
-                  <li className="mt-3 list-none">
-                    <button
-                      // onClick={handleLogout}
-                      className="  w-full  px-4 py-1 rounded  bg-[#D95C78]/35 text-[#fff] text-center py-[8.7px]  flex-1 hover:text-[#FFF4F5] hover:bg-white/5 cursor-pointer "
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </ul>
+                {/* Desktop Logout */}
+                <button
+                  // onClick={handleLogout}
+                  className=" hidden md:flex items-center gap-2 px-5 py-1 text-[14px]  bg-white text-black hover:bg-[#fff]/95 px-5 py-2 rounded-md font-medium  transition-all duration-300 cursor-pointer"
+                >
+                  Logout
+                </button>
               </div>
+            )}
 
-              {/* Desktop Logout */}
-              <button
-                // onClick={handleLogout}
-                className=" hidden md:flex items-center gap-2 px-5 py-1 text-[14px]  bg-white text-black hover:bg-[#fff]/95 px-5 py-2 rounded-md font-medium  transition-all duration-300 cursor-pointer"
-              >
-                Logout
-              </button>
-            </div>
-          )}
-
-          {/* Mobile Menu */}
-          <button
-            onClick={() => setOpen(true)}
-            className="md:hidden text-3xl text-[#FFF4F5] hover:text-[#F29BAE] transition-all duration-300 cursor-pointer"
-          >
-            <HiMenu />
-          </button>
+            {/* Mobile Menu */}
+            <button
+              onClick={() => setOpen(true)}
+              className="md:hidden text-3xl text-[#FFF4F5] hover:text-[#F29BAE] transition-all duration-300 cursor-pointer"
+            >
+              <HiMenu />
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* =============== mobile dropdown ================== */}
 
       {/* mobile dropdown/slide */}
       {open && (
