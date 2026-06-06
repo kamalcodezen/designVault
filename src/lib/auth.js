@@ -6,6 +6,7 @@ const client = new MongoClient(process.env.MONGO_DB_URI);
 const db = client.db("designVault");
 
 export const auth = betterAuth({
+
     baseURL: process.env.BETTER_AUTH_URL,
 
     database: mongodbAdapter(db, {

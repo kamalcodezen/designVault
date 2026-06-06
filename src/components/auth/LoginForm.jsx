@@ -49,9 +49,7 @@ const LoginFrom = () => {
       !/[A-Z]/.test(password) ||
       !/[a-z]/.test(password)
     ) {
-      toast.error(
-        "Password dosen't match",
-      );
+      toast.error("Password dosen't match");
       return;
     }
 
@@ -65,6 +63,14 @@ const LoginFrom = () => {
           onRequest: () => {
             setLoading(true);
           },
+
+          // onSuccess: async () => {
+          //   setLoading(false);
+          //   const session = await authClient.getSession();
+          //   console.log("SESSION AFTER LOGIN:", session);
+          //   toast.success("Welcome back! 🌸 Login successful");
+          //   window.location.href = "/";
+          // },
 
           onSuccess: () => {
             setLoading(false);
@@ -101,7 +107,7 @@ const LoginFrom = () => {
   };
 
   return (
-    <div className="relative w-11/12 mx-auto min-h-screen flex items-center justify-center ">
+    <div className="relative w-11/12 mx-auto min-h-screen flex items-center justify-center lg:justify-end">
       <div className="min-h-[80vh] flex flex-col items-center justify-center w-full max-w-md py-6 bg-white/[0.03]  backdrop-blur-2xl border border-white/10 rounded shadow-[0_8px_32px_rgba(0,0,0,0.25)] overflow-hidden">
         <div className="text-start">
           {/* header */}
