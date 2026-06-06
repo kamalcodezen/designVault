@@ -2,25 +2,39 @@
 
 import { motion } from "framer-motion";
 import { FaImage, FaLightbulb } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 const AddIdea = () => {
-    
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
-    const ideas = Object.fromEntries(formData.entries());
+    const ideasData = Object.fromEntries(formData.entries());
+    // Convert tags string to array
+    ideasData.tags = ideasData.tags.split(",").map((tag) => tag.trim());
 
-    const res = await fetch(``, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(ideas),
-    });
-    const data = await res.json();
+    
+    try {
+      const res = await fetch("http://localhost:8000/ideas", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(ideasData),
+      });
 
-    console.log(data,"after post")
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success(" Idea submitted successfully!");
+        // form.reset();
+        // console.log(data, "after post");
+      } else {
+        toast.error("❌ Failed to submit idea");
+      }
+    } catch (error) {
+      //   console.error(error);
+      toast.error(" Something went wrong");
+    }
   };
 
   return (
@@ -102,6 +116,7 @@ const AddIdea = () => {
                       <option>Health</option>
                       <option>Education</option>
                       <option>FinTech</option>
+                      <option>ECommerce</option>
                     </select>
                   </div>
                 </div>
@@ -156,7 +171,7 @@ const AddIdea = () => {
               </label>
 
               <input
-                name="short-description"
+                name="shortDescription"
                 type="text"
                 placeholder="Enter short description"
                 className="w-full bg-[#140F11] border border-white/10 rounded-xl px-4 py-3 text-[#FFF4F5] outline-none focus:border-[#D95C78]"
@@ -169,7 +184,7 @@ const AddIdea = () => {
               </label>
 
               <textarea
-                name="detailed-description"
+                name="detailedDescription"
                 rows={5}
                 placeholder="Describe your startup idea..."
                 className="w-full bg-[#140F11] border border-white/10 rounded-xl px-4 py-3 text-[#FFF4F5] outline-none resize-none focus:border-[#D95C78]"
@@ -225,14 +240,14 @@ const AddIdea = () => {
               <div className="flex gap-3">
                 <button
                   type="button"
-                  className="px-6 py-2.5 rounded-xl border border-white/10 text-[#FFF4F5]"
+                  className="px-6 py-2.5 rounded border border-white/10 text-[#FFF4F5] cursor-pointer"
                 >
                   Cancel
                 </button>
 
                 <button
                   type="submit"
-                  className="px-8 py-2.5 rounded-xl bg-[#D95C78] text-white hover:bg-[#c84b67] transition-all"
+                  className="px-8 py-2.5 rounded bg-[#D95C78] text-white hover:bg-[#c84b67] transition-all cursor-pointer"
                 >
                   Submit Idea
                 </button>
