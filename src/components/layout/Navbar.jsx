@@ -6,7 +6,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 import { Avatar } from "@heroui/react";
 import { usePathname } from "next/navigation";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
-
+import { PiTrendUpLight } from "react-icons/pi";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -25,10 +25,9 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-0 left-0  w-full z-50">
-      
       {/* left side */}
       <div className=" w-11/12 mx-auto px-6 py-4 flex justify-between items-center text-white">
-        <div className="flex items-center justify-center gap-20">
+        <div className="flex items-center justify-center gap-10">
           {/* logo */}
           <Link href={"/"}>
             <p
@@ -61,10 +60,10 @@ const Navbar = () => {
             <div className="h-10 w-24 animate-pulse rounded-2xl bg-muted" />
           )}
 
-          {user ? (
-            <>
-              {/* dropdown Avatar */}
-              <div className="flex items-center justify-center">
+          <>
+            {/* dropdown Avatar */}
+            <div className="flex items-center justify-center">
+              {user && (
                 <div className="flex items-center gap-4 mr-4 md:mr-0">
                   {/* Avatar + Dropdown */}
                   <div className="dropdown dropdown-end">
@@ -168,18 +167,20 @@ const Navbar = () => {
                     Logout
                   </button>
                 </div>
+              )}
 
-                {/* Mobile Menu */}
-                <button
-                  onClick={() => setOpen(true)}
-                  className="md:hidden text-3xl text-[#FFF4F5] hover:text-[#F29BAE] transition-all duration-300 cursor-pointer"
-                >
-                  <HiMenu />
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
+              {/* Mobile Menu */}
+              <button
+                onClick={() => setOpen(true)}
+                className="md:hidden text-3xl text-[#FFF4F5] hover:text-[#F29BAE] transition-all duration-300 cursor-pointer"
+              >
+                <HiMenu />
+              </button>
+            </div>
+          </>
+
+          <>
+            {!user && (
               <div className="flex items-center justify-center gap-2 text-[14px]">
                 <Link
                   href="/login"
@@ -195,8 +196,8 @@ const Navbar = () => {
                   Register
                 </Link>
               </div>
-            </>
-          )}
+            )}
+          </>
         </div>
       </div>
 

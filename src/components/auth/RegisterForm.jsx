@@ -1,9 +1,8 @@
 "use client";
 
 import "../auth/auth.css";
-// import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
-
 import { Eye, EyeOff, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,11 +24,11 @@ const RegisterForm = () => {
   } = useForm();
 
   // Google login
-  //   const googleSignUp = async () => {
-  //     const data = await authClient.signIn.social({
-  //       provider: "google",
-  //     });
-  //   };
+    const googleSignUp = async () => {
+      const data = await authClient.signIn.social({
+        provider: "google",
+      });
+    };
 
   // REGISTER
   const handleRegister = async (data) => {
@@ -83,7 +82,7 @@ const RegisterForm = () => {
               },
             );
 
-            router.push("/login");
+            router.push("/");
           },
 
           onError: (ctx) => {
@@ -267,7 +266,7 @@ const RegisterForm = () => {
                 autoClose: 3000,
               });
             }}
-            // onClick={googleSignUp}
+            onClick={googleSignUp}
           >
             <FcGoogle size={20} />
             <span>Continue with Google</span>
