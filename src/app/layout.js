@@ -1,5 +1,6 @@
 import { Poppins, Urbanist, Hind_Siliguri, } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
         <main className="min-h-screen">
           {children}
         </main>
+        <ToastContainer />
       </body>
     </html>
   );

@@ -2,7 +2,10 @@ import LoginForm from "@/components/auth/LoginForm";
 
 const LoginPage = () => {
   return (
-    <div className="w-9/12 mx-auto min-h-screen" style={{backgroundImage:"url('/images/signup.png')"}}>
+    <div
+      className="min-h-screen  bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/images/signup.png')" }}
+    >
       <LoginForm />
     </div>
   );

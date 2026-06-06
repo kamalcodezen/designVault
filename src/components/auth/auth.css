@@ -1,13 +1,14 @@
 .input-group {
     position: relative;
-    width: 340px;
+    max-width: 340px;
+    width: 100%;
 }
 
 .input-group input {
     width: 100%;
     padding: 10px 14px;
     font-size: 13px;
-    border: 1px solid #ff3c06;
+    border-bottom: 1px solid #ff3c06;
     outline: none;
     border-radius: 4px;
     background: white;
@@ -24,7 +25,8 @@
     pointer-events: none;
     transition: 0.3s ease;
     background-color: #ffffff;
-    padding: 0 5px;
+    padding: 0 7px;
+    border-radius: 2px;
 }
 
 .input-group input:focus+label,

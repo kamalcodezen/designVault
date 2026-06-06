@@ -20,7 +20,7 @@ const Navbar = () => {
     { label: "My Interactions", path: "/my-interactions" },
   ];
 
-  const user = true;
+  const user = false;
   const isPending = false;
 
   return (
