@@ -149,11 +149,11 @@ const Footer = () => {
             <h3 className="text-[#FFF4F5] font-semibold mb-5">Contact Info</h3>
 
             <div className="space-y-3 text-[#FFF4F5]/60">
-              <p>📧 support@designvault.com</p>
+              <p> support@designvault.com</p>
 
-              <p>📍 Kolkata, India</p>
+              <p> Delhi, India</p>
 
-              <p>🌐 Global Creative Community</p>
+              <p> Global Creative Community</p>
             </div>
           </div>
         </motion.div>

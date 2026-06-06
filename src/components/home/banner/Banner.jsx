@@ -39,7 +39,7 @@ const Banner = () => {
             {/* Overlay */}
             <div className="absolute inset-0" />
 
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1B1416]/45 via-[#1B1416]/40 to-transparent " />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1B1416]/20 via-[#1B1416]/20 to-transparent " />
 
             {/* Content */}
             <div className="relative z-20 h-full max-w-11/12 mx-auto px-6 pt-22">
@@ -106,7 +106,7 @@ const Banner = () => {
                       }}
                       className="
                           px-8
-                          py-3
+                          py-2
                           rounded-lg
                           bg-[#D95C78]
                           text-white
@@ -127,7 +127,7 @@ const Banner = () => {
                       }}
                       className="
                           px-10
-                          py-3
+                          py-2
                           rounded-lg
                           border
                           border-white
@@ -232,7 +232,7 @@ const Banner = () => {
                       }}
                       className="
                           px-8
-                          py-3
+                           py-2
                           rounded-lg
                           bg-white
                           text-black
@@ -253,7 +253,7 @@ const Banner = () => {
                       }}
                       className="
                           px-10
-                          py-3
+                           py-2
                           rounded-lg
                           border
                           border-white
