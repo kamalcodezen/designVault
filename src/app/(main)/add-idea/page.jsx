@@ -1,11 +1,11 @@
-
+import AddIdea from "@/components/ideasPage.jsx/AddIdea";
 
 const AddIdeaPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div className="min-h-screen">
+      <AddIdea />
+    </div>
+  );
 };
 
 export default AddIdeaPage;
