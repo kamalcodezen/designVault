@@ -4,18 +4,15 @@ import Link from "next/link";
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
 import { Avatar } from "@heroui/react";
-import { usePathname,useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 
-
-
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter()
-
+  const router = useRouter();
 
   const links = [
     // { label: "Home", path: "/" },
@@ -30,7 +27,6 @@ const Navbar = () => {
   const user = data?.user;
   // console.log(user, "navbar");
 
-  
   // logout function
   const handleLogout = async () => {
     await authClient.signOut({
@@ -194,14 +190,17 @@ const Navbar = () => {
             )}
 
             {/* Mobile Menu */}
-            <button
-              onClick={() => setOpen(true)}
-              className="md:hidden text-3xl text-[#FFF4F5] hover:text-[#F29BAE] transition-all duration-300 cursor-pointer"
-            >
-              <HiMenu />
-            </button>
+            {!isPending && (
+              <button
+                onClick={() => setOpen(true)}
+                className="md:hidden text-3xl text-[#FFF4F5] hover:text-[#F29BAE] transition-all duration-300 cursor-pointer"
+              >
+                <HiMenu />
+              </button>
+            )}
           </div>
 
+          {/* desktop user not available */}
           {!isPending && !user && (
             <div className="flex items-center justify-center gap-2 text-[14px]">
               <Link
@@ -287,11 +286,14 @@ const Navbar = () => {
 
           {user ? (
             <>
-              <div className="flex items-center justify-between px-4 py-1 rounded-sm transition-all duration-300 text-[#FFF4F5]/70 hover:text-[#FFF4F5] hover:bg-white/5 cursor-pointer">
+              <Link
+                href={"/profile"}
+                className="flex items-center justify-between px-4 py-1 rounded-sm transition-all duration-300 text-[#FFF4F5]/70 hover:text-[#FFF4F5] hover:bg-white/5 cursor-pointer"
+              >
                 <span>Profile</span>
 
                 <IoIosArrowDroprightCircle className="text-[#FFF4F5]/40 text-xl" />
-              </div>
+              </Link>
 
               <span
                 onClick={() => {
