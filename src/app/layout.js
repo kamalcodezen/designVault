@@ -1,21 +1,28 @@
-import { Hind_Siliguri, Roboto } from "next/font/google";
+import { Poppins, Urbanist, Hind_Siliguri, } from "next/font/google";
 import "./globals.css";
 
 
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+const urban = Urbanist({
+  variable: "--font-urban",
+  subsets: ["latin"],
+  weight: ['400', '500', '600', '700'],
 
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"]
 })
+
+
 const siliguri = Hind_Siliguri({
+  variable: "--font-siliguri",
   subsets: ["latin"],
-  weight: ["400", "500", "600"]
+  weight: ['400', '500', '600', '700'],
 })
+
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ['400', '500', '600', '700'],
+});
 
 
 export const metadata = {
@@ -27,7 +34,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${siliguri.className} h-full antialiased`}
+      className={`${urban.variable}  ${poppins.variable} ${siliguri.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <main className="min-h-screen">

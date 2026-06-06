@@ -23,16 +23,16 @@ const Navbar = () => {
   const isPending = false;
 
   return (
-    <div className=" sticky top-0 z-50">
+    <div className="fixed top-0 left-0  w-full z-50">
       {/* left side */}
       <div className="w-full mx-auto px-6 py-4 flex justify-between items-center text-white">
-        <div
-          className="flex items-center justify-center gap-8
-        "
-        >
-          <h1 className="text-xl font-light flex items-center gap-2">
-            Design Vault
-          </h1>
+        <div className="flex items-center justify-center gap-8">
+          {/* logo */}
+          <Link href={"/"}>
+            <h1 className="text-xl font-light flex items-center gap-2">
+              Design Vault
+            </h1>
+          </Link>
 
           <div className="hidden md:flex gap-5 text-[14px]">
             {links.map((link, ind) => {
