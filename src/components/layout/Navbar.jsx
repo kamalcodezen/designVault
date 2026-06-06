@@ -12,7 +12,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const links = [
-    { label: "Home", path: "/" },
+    // { label: "Home", path: "/" },
     { label: "Ideas", path: "/ideas" },
     { label: "Add Idea", path: "/add-idea" },
     { label: "My Ideas", path: "/my-idea" },
@@ -26,15 +26,15 @@ const Navbar = () => {
     <div className="fixed top-0 left-0  w-full z-50">
       {/* left side */}
       <div className="w-full mx-auto px-6 py-4 flex justify-between items-center text-white">
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex items-center justify-center gap-20">
           {/* logo */}
           <Link href={"/"}>
-            <h1 className="text-xl font-light flex items-center gap-2">
-              Design Vault
-            </h1>
+            <p className="text-3xl font-semibold flex items-center " title="Home">
+              Design<span className="text-[#D95C78]">Vault</span>
+            </p>
           </Link>
 
-          <div className="hidden md:flex gap-5 text-[14px]">
+          <div className="hidden md:flex gap-5 text-[17px]">
             {links.map((link, ind) => {
               return (
                 <Link
