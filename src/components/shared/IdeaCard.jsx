@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const IdeaCard = ({ idea, index }) => {
   return (
@@ -53,9 +54,11 @@ const IdeaCard = ({ idea, index }) => {
             </p>
           </div>
 
-          <button className="mt-3 w-full bg-pink-500 hover:bg-pink-600 transition py-1.5 rounded-lg font-medium cursor-pointer">
-            View Details
-          </button>
+          <Link href={`/ideas/${idea._id}`}>
+            <button className="mt-3 w-full bg-pink-500 hover:bg-pink-600 transition py-1.5 rounded-lg font-medium cursor-pointer">
+              View Details
+            </button>
+          </Link>
         </div>
       </motion.div>
     </div>

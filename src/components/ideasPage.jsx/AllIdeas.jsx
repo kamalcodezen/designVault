@@ -3,6 +3,7 @@ import SearchIdea from "./SearchIdea";
 import IdeaCard from "../shared/IdeaCard";
 
 const AllIdeas = async () => {
+  
   const ideas = await allIdeasData();
 
   return (
