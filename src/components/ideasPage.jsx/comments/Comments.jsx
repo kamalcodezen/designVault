@@ -17,8 +17,6 @@ const CommentsPage = ({ userComment, user }) => {
   const [editText, setEditText] = useState(userComment?.comment);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-
-  
   // data access and update data
   const handleUpdate = async () => {
     // console.log("Update:", editText);
@@ -66,6 +64,7 @@ const CommentsPage = ({ userComment, user }) => {
               alt={userComment?.userName}
               width={48}
               height={48}
+              referrerPolicy="no-referrer"
               className="w-12 h-12 rounded-full object-cover border border-[#E26D8D]/30"
             />
 

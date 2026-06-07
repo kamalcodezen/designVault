@@ -8,6 +8,7 @@ const IdeasDetailsPage = async ({ params }) => {
 
   const userComment = await getCommentsData(id);
 
+ 
   return (
     <div>
       <IdeasDetails ideaData={ideaData} userComment={userComment} />

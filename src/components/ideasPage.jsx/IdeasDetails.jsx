@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaArrowLeft, FaRegCommentDots } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 import { authClient } from "@/lib/auth-client";
@@ -31,11 +31,10 @@ const IdeasDetails = ({ ideaData, userComment }) => {
 
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  // console.log(user, "user");
+  console.log(user, "user");
 
   const handleComment = async (e) => {
     e.preventDefault();
-
     if (!user) {
       toast.error("Please login first");
       return;
@@ -52,11 +51,10 @@ const IdeasDetails = ({ ideaData, userComment }) => {
       const dataComment = {
         userName: user?.name,
         userId: user?.id,
-        userImage: user?.imageUrl,
+        userImage: user?.image,
         userEmail: user?.email,
         ideaId: ideaData?._id,
         title,
-        imageUrl,
         category,
         comment: comment.trim(),
         createdAt: new Date().toISOString(),
@@ -212,12 +210,16 @@ const IdeasDetails = ({ ideaData, userComment }) => {
                 <h3 className="text-xl font-bold mb-5">Idea Owner</h3>
 
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-[#E26D8D]/20 flex items-center justify-center text-xl font-bold">
-                    U
-                  </div>
+                  <img
+                    src={user?.image}
+                    alt={userComment?.userName}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full object-cover border border-[#E26D8D]/30"
+                  />
 
                   <div>
-                    <h4 className="font-semibold">User Name</h4>
+                    <h4 className="font-semibold">{user?.name}</h4>
                     <p className="text-zinc-400 text-sm">Idea Creator</p>
                   </div>
                 </div>
@@ -284,16 +286,28 @@ const IdeasDetails = ({ ideaData, userComment }) => {
 
           {/* Comments List */}
           <div className="lg:col-span-8 order-2 lg:order-1 space-y-4 max-h-[500px] overflow-y-auto pr-2">
-            {userComment
-              ?.filter((comment) => comment.ideaId === _id)
-              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-              .map((comment) => (
-                <CommentsPage
-                  key={comment._id}
-                  userComment={comment}
-                  user={user}
-                />
-              ))}
+            {userComment.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-10 rounded-xl bg-white/5 border border-white/10">
+                <h3 className="text-lg font-semibold text-white">
+                  No Comments Yet
+                </h3>
+
+                <p className="text-zinc-400 text-sm mt-2">
+                  Start the conversation by posting the first comment.
+                </p>
+              </div>
+            ) : (
+              userComment
+                ?.filter((comment) => comment.ideaId === _id)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .map((comment) => (
+                  <CommentsPage
+                    key={comment._id}
+                    userComment={comment}
+                    user={user}
+                  />
+                ))
+            )}
           </div>
         </div>
       </div>
