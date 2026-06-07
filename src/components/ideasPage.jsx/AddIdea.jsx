@@ -11,7 +11,7 @@ const AddIdea = () => {
     const ideasData = Object.fromEntries(formData.entries());
     // Convert tags string to array
     ideasData.tags = ideasData.tags.split(",").map((tag) => tag.trim());
-
+ 
     
     try {
       const res = await fetch("http://localhost:8000/ideas", {
@@ -127,7 +127,7 @@ const AddIdea = () => {
                   </label>
 
                   <input
-                    name="image"
+                    name="imageUrl"
                     type="text"
                     placeholder="https://example.com/image.jpg"
                     className="w-full bg-[#140F11] border border-white/10 rounded-xl px-4 py-3 text-[#FFF4F5] outline-none focus:border-[#D95C78]"

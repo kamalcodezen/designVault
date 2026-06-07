@@ -5,7 +5,68 @@ import Link from "next/link";
 import { FaArrowLeft, FaRegCommentDots } from "react-icons/fa";
 import { motion } from "framer-motion";
 
+import { authClient } from "@/lib/auth-client";
+import { commentDataById } from "@/lib/data";
+import { toast } from "react-toastify";
+
 const IdeasDetails = ({ ideaData }) => {
+  const {
+    audience,
+    budget,
+    category,
+    tags,
+    solution,
+    statement,
+    image,
+    title,
+    _id,
+  } = ideaData;
+
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  // console.log(user, "user");
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      toast.error("Please login first");
+      return;
+    }
+
+    const comment = e.target.comment.value;
+
+    if (!comment.trim()) {
+      toast.error("Comment cannot be empty");
+      return;
+    }
+
+    try {
+      const dataComment = {
+        userName: user?.name,
+        userId: user?.id,
+        userImage: user?.image,
+        userEmail: user?.email,
+        ideaId: ideaData?._id, 
+        title,
+        imageUrl: image,
+        category,
+        comment: comment.trim(),
+        createdAt: new Date().toISOString(),
+      };
+
+      const result = await commentDataById(dataComment);
+
+      if (result?.insertedId) {
+        toast.success("Comment added successfully");
+        // e.target.reset();
+      }
+    } catch (error) {
+      // console.log(error);
+      toast.error("Failed to add comment");
+    }
+  };
+
   return (
     <motion.section
       className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28"
@@ -30,21 +91,19 @@ const IdeasDetails = ({ ideaData }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-semibold mb-3">
-            {ideaData?.title}
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-semibold mb-3">{title}</h1>
 
           <div className="flex flex-wrap gap-3 text-sm text-zinc-300">
             <span className="px-3 py-1 rounded-full bg-[#E26D8D]/20">
-              {ideaData?.category}
+              {category}
             </span>
 
             <span className="px-3 py-1 rounded-full bg-white/10">
-              Budget: ${ideaData?.budget}
+              Budget: ${budget}
             </span>
 
             <span className="px-3 py-1 rounded-full bg-white/10">
-              {ideaData?.audience}
+              {audience}
             </span>
           </div>
         </motion.div>
@@ -58,7 +117,7 @@ const IdeasDetails = ({ ideaData }) => {
         >
           <Image
             src={ideaData?.image}
-            alt={ideaData?.title}
+            alt={title}
             fill
             className="object-cover"
           />
@@ -93,9 +152,7 @@ const IdeasDetails = ({ ideaData }) => {
             >
               <h2 className="text-2xl font-bold mb-4">Problem Statement</h2>
 
-              <p className="text-zinc-300 leading-relaxed">
-                {ideaData?.statement}
-              </p>
+              <p className="text-zinc-300 leading-relaxed">{statement}</p>
             </motion.div>
 
             {/* Solution */}
@@ -108,9 +165,7 @@ const IdeasDetails = ({ ideaData }) => {
             >
               <h2 className="text-2xl font-bold mb-4">Proposed Solution</h2>
 
-              <p className="text-zinc-300 leading-relaxed">
-                {ideaData?.solution}
-              </p>
+              <p className="text-zinc-300 leading-relaxed">{solution}</p>
             </motion.div>
 
             {/* Tags */}
@@ -124,7 +179,7 @@ const IdeasDetails = ({ ideaData }) => {
               <h2 className="text-2xl font-bold mb-4">Tags</h2>
 
               <div className="flex flex-wrap gap-3">
-                {ideaData?.tags?.map((tag, index) => (
+                {tags?.map((tag, index) => (
                   <span
                     key={index}
                     className="px-4 py-1 rounded-full bg-[#E26D8D]/20 text-[#E26D8D] border border-[#E26D8D]/20"
@@ -172,17 +227,17 @@ const IdeasDetails = ({ ideaData }) => {
                 <div className="space-y-4">
                   <div>
                     <p className="text-zinc-400 text-sm">Category</p>
-                    <p>{ideaData?.category}</p>
+                    <p>{category}</p>
                   </div>
 
                   <div>
                     <p className="text-zinc-400 text-sm">Estimated Budget</p>
-                    <p>${ideaData?.budget}</p>
+                    <p>${budget}</p>
                   </div>
 
                   <div>
                     <p className="text-zinc-400 text-sm">Target Audience</p>
-                    <p>{ideaData?.audience}</p>
+                    <p>{audience}</p>
                   </div>
 
                   <div>
@@ -214,8 +269,9 @@ const IdeasDetails = ({ ideaData }) => {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <form onSubmit={handleComment} className="space-y-4">
             <textarea
+              name="comment"
               placeholder="Write your comment..."
               className="w-full h-32 rounded-lg bg-white/5 border border-white/10 p-4 outline-none focus:border-[#E26D8D]"
             />
@@ -228,7 +284,7 @@ const IdeasDetails = ({ ideaData }) => {
             >
               Post Comment
             </motion.button>
-          </div>
+          </form>
         </motion.div>
       </div>
     </motion.section>

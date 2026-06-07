@@ -15,3 +15,20 @@ export const singleIdeaDataById = async (id) => {
     // console.log(data, "single") 
     return data
 }
+
+
+// details page comment data post and access
+export const commentDataById = async (dataComment) => {
+
+    const res = await fetch(`http://localhost:8000/comments`, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(dataComment)
+    })
+    const data = await res.json()
+    // console.log(data, "after comment data")
+    return data;
+
+}

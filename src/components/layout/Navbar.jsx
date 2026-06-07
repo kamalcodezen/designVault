@@ -300,7 +300,7 @@ const Navbar = () => {
                   setOpen(false);
                   handleLogout();
                 }}
-                className="block bg-[#D95C78]/35 text-[#fff] text-center py-[8.7px]  flex-1 hover:text-[#FFF4F5] hover:bg-white/5 "
+                className="block bg-[#D95C78]/35 text-[#fff] text-center py-[8.7px]  flex-1 hover:text-[#FFF4F5] hover:bg-white/5 cursor-pointer"
               >
                 Logout
               </span>
@@ -310,7 +310,7 @@ const Navbar = () => {
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
-                className="block bg-[#D95C78]/35 text-[#fff] text-center py-[8.7px]  flex-1 hover:text-[#FFF4F5] hover:bg-white/5 "
+                className="block bg-[#D95C78]/35 text-[#fff] text-center py-[8.7px]  flex-1 hover:text-[#FFF4F5] hover:bg-white/5 cursor-pointer"
               >
                 Login
               </Link>
@@ -318,7 +318,7 @@ const Navbar = () => {
               <Link
                 href="/signup"
                 onClick={() => setOpen(false)}
-                className="block  text-center py-[8.7px] flex-1 hover:text-[#FFF4F5] hover:bg-white/5"
+                className="block  text-center py-[8.7px] flex-1 hover:text-[#FFF4F5] hover:bg-white/5 cursor-pointer"
               >
                 Register
               </Link>
