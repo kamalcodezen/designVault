@@ -8,8 +8,9 @@ import { motion } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
 import { commentDataById } from "@/lib/data";
 import { toast } from "react-toastify";
-import CommentsPage from "./Comments";
+
 import { useRouter } from "next/navigation";
+import CommentsPage from "./comments/Comments";
 
 const IdeasDetails = ({ ideaData, userComment }) => {
   const router = useRouter();

@@ -6,7 +6,7 @@ const IdeasDetailsPage = async ({ params }) => {
 
   const ideaData = await singleIdeaDataById(id);
 
-  const userComment = await getCommentsData();
+  const userComment = await getCommentsData(id);
 
   return (
     <div>
