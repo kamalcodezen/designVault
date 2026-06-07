@@ -10,6 +10,21 @@ export const allIdeasData = async () => {
     return data
 }
 
+// ideas added 
+export const addUserIdeasData = async (addIdeaInfo) => {
+    const res = await fetch("http://localhost:8000/ideas", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(addIdeaInfo),
+    });
+
+    const data = await res.json();
+    return data
+}
+
+
 // ideas details data by id
 export const singleIdeaDataById = async (id) => {
     const res = await fetch(`http://localhost:8000/ideas/${id}`)

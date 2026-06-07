@@ -1,39 +1,51 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+import { addUserIdeasData } from "@/lib/data";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { FaImage, FaLightbulb } from "react-icons/fa6";
 import { toast } from "react-toastify";
 
 const AddIdea = () => {
+  const router = useRouter();
+
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  // console.log(user, "user idea");
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      toast.error("Please login first");
+    }
+
     const formData = new FormData(e.currentTarget);
     const ideasData = Object.fromEntries(formData.entries());
-    // Convert tags string to array
     ideasData.tags = ideasData.tags.split(",").map((tag) => tag.trim());
- 
-    
+
+    const addIdeaInfo = {
+      userName: user?.name,
+      userId: user?.id,
+      userImage: user?.image,
+      userEmail: user?.email,
+      createdAt: new Date().toISOString(),
+
+      ...ideasData,
+    };
+
     try {
-      const res = await fetch("http://localhost:8000/ideas", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(ideasData),
-      });
+      const data = await addUserIdeasData(addIdeaInfo);
 
-      const data = await res.json();
-
-      if (res.ok) {
-        toast.success(" Idea submitted successfully!");
-        // form.reset();
-        // console.log(data, "after post");
+      if (data.acknowledged) {
+        toast.success("Idea submitted successfully!");
+        // e.target.reset();
+        router.refresh();
       } else {
-        toast.error("❌ Failed to submit idea");
+        toast.error("Failed to submit idea");
       }
     } catch (error) {
-      //   console.error(error);
-      toast.error(" Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 

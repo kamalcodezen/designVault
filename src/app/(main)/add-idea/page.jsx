@@ -1,4 +1,4 @@
-import AddIdea from "@/components/ideasPage.jsx/AddIdea";
+import AddIdea from "@/components/ideasPage/AddIdea";
 
 const AddIdeaPage = () => {
   return (

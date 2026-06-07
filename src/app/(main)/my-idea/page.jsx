@@ -1,11 +1,16 @@
+import MyIdeas from "@/components/myIdeas/MyIdeas";
+import { allIdeasData } from "@/lib/data";
 
+const MyIdeasPage = async () => {
+  const myIdeas = await allIdeasData();
 
-const MyIdeaPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  // console.log(myIdeas, "my idea");
+
+  return (
+    <div className="min-h-screen">
+      <MyIdeas myIdeas={myIdeas} />
+    </div>
+  );
 };
 
-export default MyIdeaPage;
+export default MyIdeasPage;

@@ -1,4 +1,4 @@
-import AllIdeas from "@/components/ideasPage.jsx/AllIdeas";
+import AllIdeas from "@/components/ideasPage/AllIdeas";
 
 const AllIdeasPage = () => {
   return (
