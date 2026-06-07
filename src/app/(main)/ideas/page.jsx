@@ -1,11 +1,11 @@
+import AllIdeas from "@/components/ideasPage.jsx/AllIdeas";
 
-
-const IdeasPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const AllIdeasPage = () => {
+  return (
+    <div className="min-h-screen">
+      <AllIdeas />
+    </div>
+  );
 };
 
-export default IdeasPage;
+export default AllIdeasPage;
