@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidatePath } from "next/cache"
+
 
 // all ideas data 
 export const allIdeasData = async () => {
@@ -39,6 +39,22 @@ export const commentDataById = async (dataComment) => {
 export const getCommentsData = async (ideaId) => {
     const res = await fetch(`http://localhost:8000/comments/${ideaId}`, {
         cache: "no-store"
+    })
+    const data = await res.json()
+    return data;
+}
+
+
+// update comment
+export const updateComment = async (id, editText) => {
+    const res = await fetch(`http://localhost:8000/comments/${id}`, {
+        method: "PATCH",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            comment: editText
+        })
     })
     const data = await res.json()
     return data;

@@ -3,19 +3,33 @@
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import UpdateComment from "./UpdateComment";
+import { updateComment } from "@/lib/data";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const CommentsPage = ({ userComment, user }) => {
   const isOwner = user?.email === userComment?.userEmail;
+  const { _id } = userComment;
+  const router = useRouter();
 
   const [isOpen, setIsOpen] = useState(false);
   const [editText, setEditText] = useState(userComment?.comment);
 
+  // data access and update data
   const handleUpdate = async () => {
-    console.log("Update:", editText);
+    // console.log("Update:", editText);
+    try {
+      const data = await updateComment(_id, editText);
 
-    // API call এখানে হবে
+      if (data.modifiedCount > 0) {
+        toast.success("Comment updated successfully");
 
-    setIsOpen(false);
+        setIsOpen(false);
+        router.refresh();
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
