@@ -59,3 +59,13 @@ export const updateComment = async (id, editText) => {
     const data = await res.json()
     return data;
 }
+
+
+// comment delete data
+export const deleteComment = async (id) => {
+    const res = await fetch(`http://localhost:8000/comments/${id}`, {
+        method: "DELETE",
+    })
+    const data = await res.json()
+    return data
+} 

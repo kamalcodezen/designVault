@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import UpdateComment from "./UpdateComment";
-import { updateComment } from "@/lib/data";
+import { deleteComment, updateComment } from "@/lib/data";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import DeleteComment from "./DeleteComment";
 
 const CommentsPage = ({ userComment, user }) => {
   const isOwner = user?.email === userComment?.userEmail;
@@ -14,7 +15,10 @@ const CommentsPage = ({ userComment, user }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [editText, setEditText] = useState(userComment?.comment);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
+
+  
   // data access and update data
   const handleUpdate = async () => {
     // console.log("Update:", editText);
@@ -26,6 +30,26 @@ const CommentsPage = ({ userComment, user }) => {
 
         setIsOpen(false);
         router.refresh();
+      } else {
+        toast.error("Failed to comment");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  // delete comment
+  const handleDelete = async () => {
+    try {
+      const data = await deleteComment(_id);
+
+      if (data.deletedCount > 0) {
+        toast.success("Comment deleted successfully");
+
+        setIsDeleteOpen(false);
+        router.refresh();
+      } else {
+        toast.error("Failed to delete comment");
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -34,7 +58,7 @@ const CommentsPage = ({ userComment, user }) => {
 
   return (
     <>
-      <div className="p-5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl">
+      <div className="p-5 rounded-lg bg-white/5 border border-white/10 backdrop-blur-xl">
         <div className="flex items-start justify-between">
           <div className="flex gap-3">
             <img
@@ -65,7 +89,10 @@ const CommentsPage = ({ userComment, user }) => {
                 <MdEdit size={18} />
               </button>
 
-              <button className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition cursor-pointer">
+              <button
+                onClick={() => setIsDeleteOpen(true)}
+                className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 transition cursor-pointer"
+              >
                 <MdDelete size={18} />
               </button>
             </div>
@@ -83,6 +110,13 @@ const CommentsPage = ({ userComment, user }) => {
         editText={editText}
         setEditText={setEditText}
         handleUpdate={handleUpdate}
+      />
+
+      <DeleteComment
+        // isOpen, onClose, handleDelete
+        isOpen={isDeleteOpen}
+        onClose={() => setIsDeleteOpen(false)}
+        handleDelete={handleDelete}
       />
     </>
   );

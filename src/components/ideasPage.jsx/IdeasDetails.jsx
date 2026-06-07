@@ -283,7 +283,7 @@ const IdeasDetails = ({ ideaData, userComment }) => {
           </div>
 
           {/* Comments List */}
-          <div className="lg:col-span-8 order-2 lg:order-1 space-y-4 max-h-[600px] overflow-y-auto pr-2">
+          <div className="lg:col-span-8 order-2 lg:order-1 space-y-4 max-h-[500px] overflow-y-auto pr-2">
             {userComment
               ?.filter((comment) => comment.ideaId === _id)
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
