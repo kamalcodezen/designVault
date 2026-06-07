@@ -21,7 +21,7 @@ const IdeaCard = ({ idea, index }) => {
       >
         <div className="relative h-38 overflow-hidden">
           <Image
-            src={idea.image}
+            src={idea.imageUrl}
             alt={idea.title}
             fill
             className="object-cover group-hover:scale-110 transition duration-500"

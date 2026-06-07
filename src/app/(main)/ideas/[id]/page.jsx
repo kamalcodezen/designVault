@@ -1,14 +1,16 @@
 import IdeasDetails from "@/components/ideasPage.jsx/IdeasDetails";
-import { singleIdeaDataById } from "@/lib/data";
+import { getCommentsData, singleIdeaDataById } from "@/lib/data";
 
 const IdeasDetailsPage = async ({ params }) => {
   const { id } = await params;
-  //   console.log(id, "params");
+
   const ideaData = await singleIdeaDataById(id);
-  //   console.log(ideaData,"single");
+
+  const userComment = await getCommentsData();
+
   return (
     <div>
-      <IdeasDetails ideaData={ideaData} />
+      <IdeasDetails ideaData={ideaData} userComment={userComment} />
     </div>
   );
 };

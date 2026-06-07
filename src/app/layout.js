@@ -1,3 +1,9 @@
+// // google proxy forcefully connect
+import dns from "node:dns";
+dns.setServers(["8.8.8.8", "8.8.4.4"])
+// // =============================
+
+
 import { Poppins, Urbanist, Hind_Siliguri, } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";

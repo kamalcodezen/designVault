@@ -32,3 +32,10 @@ export const commentDataById = async (dataComment) => {
     return data;
 
 }
+
+// get comments
+export const getCommentsData = async () => {
+    const res = await fetch(`http://localhost:8000/comments`)
+    const data = await res.json()
+    return data;
+}

@@ -8,8 +8,9 @@ import { motion } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
 import { commentDataById } from "@/lib/data";
 import { toast } from "react-toastify";
+import CommentsPage from "./Comments";
 
-const IdeasDetails = ({ ideaData }) => {
+const IdeasDetails = ({ ideaData, userComment }) => {
   const {
     audience,
     budget,
@@ -17,10 +18,12 @@ const IdeasDetails = ({ ideaData }) => {
     tags,
     solution,
     statement,
-    image,
+    imageUrl,
     title,
     _id,
   } = ideaData;
+
+  // console.log(userComment,"user commnet")
 
   const { data: session } = authClient.useSession();
   const user = session?.user;
@@ -45,11 +48,11 @@ const IdeasDetails = ({ ideaData }) => {
       const dataComment = {
         userName: user?.name,
         userId: user?.id,
-        userImage: user?.image,
+        userImage: user?.imageUrl,
         userEmail: user?.email,
-        ideaId: ideaData?._id, 
+        ideaId: ideaData?._id,
         title,
-        imageUrl: image,
+        imageUrl,
         category,
         comment: comment.trim(),
         createdAt: new Date().toISOString(),
@@ -116,7 +119,7 @@ const IdeasDetails = ({ ideaData }) => {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <Image
-            src={ideaData?.image}
+            src={ideaData?.imageUrl}
             alt={title}
             fill
             className="object-cover"
@@ -251,41 +254,43 @@ const IdeasDetails = ({ ideaData }) => {
         </div>
 
         {/* Comments */}
-        <motion.div
-          className="mt-10 bg-[#241416]/80 border border-[#4D2A2F] backdrop-blur-xl rounded-lg p-6"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <FaRegCommentDots className="text-[#E26D8D]" />
-            <h2 className="text-2xl font-bold">Comments</h2>
-          </div>
+        <div className="grid lg:grid-cols-12 gap-6 mt-7">
+          {/* Comment Form */}
+          <div className="lg:col-span-4 order-1 lg:order-2">
+            <div className="sticky top-28">
+              <form onSubmit={handleComment} className="space-y-4">
+                <textarea
+                  name="comment"
+                  placeholder="Write your comment..."
+                  className="w-full h-40 rounded-lg bg-white/5 border border-white/10 p-4 outline-none focus:border-[#E26D8D]"
+                />
 
-          <div className="space-y-4 mb-6">
-            <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-              <h4 className="font-semibold">User Name</h4>
-              <p className="text-zinc-400 text-sm">No comments yet...</p>
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="w-full bg-[#E26D8D] hover:bg-pink-600 py-3 rounded-lg font-semibold transition cursor-pointer"
+                >
+                  Post Comment
+                </motion.button>
+              </form>
             </div>
           </div>
 
-          <form onSubmit={handleComment} className="space-y-4">
-            <textarea
-              name="comment"
-              placeholder="Write your comment..."
-              className="w-full h-32 rounded-lg bg-white/5 border border-white/10 p-4 outline-none focus:border-[#E26D8D]"
-            />
-
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#E26D8D] hover:bg-pink-600 px-6 py-3 rounded-lg font-semibold transition cursor-pointer"
-            >
-              Post Comment
-            </motion.button>
-          </form>
-        </motion.div>
+          {/* Comments List */}
+          <div className="lg:col-span-8 order-2 lg:order-1 space-y-4 max-h-[600px] overflow-y-auto pr-2">
+            {userComment
+              ?.filter((comment) => comment.ideaId === _id)
+              .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+              .map((comment) => (
+                <CommentsPage
+                  key={comment._id}
+                  userComment={comment}
+                  user={user}
+                />
+              ))}
+          </div>
+        </div>
       </div>
     </motion.section>
   );
