@@ -9,8 +9,11 @@ import { authClient } from "@/lib/auth-client";
 import { commentDataById } from "@/lib/data";
 import { toast } from "react-toastify";
 import CommentsPage from "./Comments";
+import { useRouter } from "next/navigation";
 
 const IdeasDetails = ({ ideaData, userComment }) => {
+  const router = useRouter();
+
   const {
     audience,
     budget,
@@ -63,6 +66,7 @@ const IdeasDetails = ({ ideaData, userComment }) => {
       if (result?.insertedId) {
         toast.success("Comment added successfully");
         // e.target.reset();
+        router.refresh();
       }
     } catch (error) {
       // console.log(error);

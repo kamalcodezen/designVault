@@ -1,5 +1,7 @@
 "use server"
 
+import { revalidatePath } from "next/cache"
+
 // all ideas data 
 export const allIdeasData = async () => {
     const res = await fetch(`http://localhost:8000/ideas`)
