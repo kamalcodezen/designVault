@@ -117,6 +117,6 @@ export const userCommentData = async (userId) => {
     );
 
     const data = await res.json();
-    console.log(data, "comment data")
+    // console.log(data, "comment data")
     return data
 };
