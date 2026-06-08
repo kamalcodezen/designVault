@@ -1,31 +1,23 @@
 "use client";
 
-import Image from "next/image";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
-import UpdateIdeaModal from "./UpdateIdeaModal";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import DeleteIdea from "./DeleteIdeaModal";
-import MainLayoutLoading from "@/app/(main)/loading";
 
-const MyIdeas = ({ myIdeas }) => {
+
+const MyInteractions = ({ myIdeas: userComments }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  if (isPending) {
-    return (
-      <>
-        <MainLayoutLoading />
-      </>
-    );
-  }
+//   const myComments =
+//     userComments?.filter((comment) => comment?.userEmail === user?.email) || [];
 
-  const userIdeas =
-    myIdeas?.filter((idea) => idea?.userEmail === user?.email) || [];
+// console.log(userComments,"usercmr")
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28">
@@ -199,59 +191,9 @@ const MyIdeas = ({ myIdeas }) => {
 
               {/* Ideas List */}
               <div>
-                {!isPending &&
-                  userIdeas?.map((idea, index) => (
-                    <motion.div
-                      key={idea._id}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: index * 0.08,
-                      }}
-                      className="flex flex-col md:flex-row md:items-center gap-4 p-5 border-b border-[#4D2A2F] hover:bg-white/[0.03] transition"
-                    >
-                      {/* Image */}
-                      <div className="relative w-full md:w-28 h-20 rounded-lg overflow-hidden">
-                        <Image
-                          src={idea?.imageUrl || "/placeholder.jpg"}
-                          alt={idea?.title || "Idea"}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
+               
 
-                      {/* Content */}
-                      <div className="flex-1">
-                        <h2 className="font-semibold text-white">
-                          {idea.title}
-                        </h2>
-
-                        <p className="text-xs text-zinc-400 mt-1">
-                          {new Date(idea.createdAt).toLocaleDateString()}
-                        </p>
-
-                        <div className="flex flex-wrap gap-4 mt-2 text-xs text-zinc-500">
-                          <span>📂 {idea.category}</span>
-
-                          <span>💰 ${idea.budget}</span>
-
-                          <span>🎯 {idea.audience}</span>
-                        </div>
-                      </div>
-
-                      {/* Actions */}
-                      <div className="flex items-center gap-4">
-                        {/* edit */}
-                        <UpdateIdeaModal idea={idea} />
-
-                        {/*  delete modal */}
-                        <DeleteIdea idea={idea} />
-                      </div>
-                    </motion.div>
-                  ))}
-
-                {userIdeas.length === 0 && (
+                {/* {myComments.length === 0 && (
                   <div className="py-20 text-center">
                     <h3 className="text-xl font-semibold text-white">
                       No Ideas Found
@@ -261,7 +203,7 @@ const MyIdeas = ({ myIdeas }) => {
                       Start by creating your first startup idea.
                     </p>
                   </div>
-                )}
+                )} */}
               </div>
             </div>
           </div>
@@ -271,4 +213,4 @@ const MyIdeas = ({ myIdeas }) => {
   );
 };
 
-export default MyIdeas;
+export default MyInteractions;

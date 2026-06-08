@@ -31,7 +31,7 @@ const IdeasDetails = ({ ideaData, userComment }) => {
 
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  console.log(user, "user");
+  // console.log(user, "user");
 
   // add comment data in database
   const handleComment = async (e) => {

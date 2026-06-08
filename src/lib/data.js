@@ -108,3 +108,6 @@ export const myIdeaDeleteData = async (id) => {
     const data = await res.json()
     return data
 }
+
+
+// m

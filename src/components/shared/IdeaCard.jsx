@@ -10,14 +10,9 @@ const IdeaCard = ({ idea, index }) => {
       <motion.div
         key={idea._id}
         className="group bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg overflow-hidden hover:border-pink-500/50 transition"
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        whileHover={{ y: -8, scale: 1.03 }}
-        transition={{
-          duration: 0.45,
-          delay: index * 0.1,
-          ease: [0.22, 1, 0.36, 1],
-        }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="relative h-38 overflow-hidden">
           <Image

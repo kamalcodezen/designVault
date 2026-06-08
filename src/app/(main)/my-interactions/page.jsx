@@ -1,11 +1,13 @@
+import { getCommentsData } from "@/lib/data";
 
+const MyInteractionsPage = async () => {
+//   const userComments = await getCommentsData();
 
-const MyInteractionsPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div className="min-h-screen">
+      {/* <MyInteractionsPage userComments={userComments} /> */}
+    </div>
+  );
 };
 
 export default MyInteractionsPage;
