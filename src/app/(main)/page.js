@@ -3,6 +3,7 @@ import FeaturedCategories from "@/components/home/FeaturedCategories";
 import HowItWorks from "@/components/home/HowItWorks";
 import LatestIdeas from "@/components/home/LatestIdeas";
 import StatisticsSection from "@/components/home/StatisticsSection";
+import TopContributors from "@/components/home/TopContributors";
 import TrendingIdeas from "@/components/home/TrendingIdeas";
 import WhyChooseIdeaVault from "@/components/home/WhyChooseIdeaVault";
 import Footer from "@/components/layout/Footer";
@@ -18,7 +19,6 @@ export default async function Home() {
 
   return (
     <>
-     
 
       <Banner />
       <TrendingIdeas ideas={ideas} />
@@ -27,7 +27,9 @@ export default async function Home() {
       <LatestIdeas ideas={ideas} />
       <HowItWorks />
       <StatisticsSection />
-    
+      <TopContributors />
+
+
     </>
   );
 }
