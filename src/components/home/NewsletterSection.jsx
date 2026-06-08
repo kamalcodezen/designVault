@@ -53,10 +53,10 @@ const NewsletterSection = () => {
 
                 <button
                   type="submit"
-                  className="h-12 px-8 rounded-lg bg-pink-500 hover:bg-pink-600 transition text-white font-medium flex items-center justify-center gap-2"
+                  className="h-12 px-8 rounded-lg bg-pink-500 hover:bg-pink-600 transition text-white font-medium flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Subscribe
-                  <FaPaperPlane />
+                  
                 </button>
               </div>
             </form>

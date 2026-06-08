@@ -8,7 +8,7 @@ const IdeaCard = ({ idea, index }) => {
   return (
     <div>
       <motion.div
-        key={idea._id}
+        key={idea?._id}
         className="group bg-white/5 border border-white/10 backdrop-blur-xl rounded-lg overflow-hidden hover:border-pink-500/50 transition"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -16,8 +16,8 @@ const IdeaCard = ({ idea, index }) => {
       >
         <div className="relative h-38 overflow-hidden">
           <Image
-            src={idea.imageUrl}
-            alt={idea.title}
+            src={idea?.imageUrl}
+            alt={idea?.title}
             fill
             className="object-cover group-hover:scale-110 transition duration-500"
           />
@@ -26,30 +26,30 @@ const IdeaCard = ({ idea, index }) => {
         <div className="p-5">
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs px-3 py-1 rounded-full bg-pink-500/20 text-pink-300">
-              {idea.category}
+              {idea?.category}
             </span>
 
-            <span className="text-pink-400 font-semibold">$ {idea.budget}</span>
+            <span className="text-pink-400 font-semibold">$ {idea?.budget}</span>
           </div>
 
-          <h2 className="text-xl font-bold mb-2 line-clamp-1">{idea.title}</h2>
+          <h2 className="text-xl font-bold mb-2 line-clamp-1">{idea?.title}</h2>
 
-          <p className="text-zinc-400 text-sm  line-clamp-2">
+          {/* <p className="text-zinc-400 text-sm  line-clamp-2">
             {idea["short-description"]}
-          </p>
+          </p> */}
 
           <div className="border-t border-white/10 pt-2">
             {/* <p className="text-sm text-zinc-400">Audience</p> */}
 
             <p
               className="text-white text-sm mt-1 line-clamp-1"
-              title={`${idea.audience}`}
+              title={`${idea?.audience}`}
             >
-              {idea.audience}
+              {idea?.audience}
             </p>
           </div>
 
-          <Link href={`/ideas/${idea._id}`}>
+          <Link href={`/ideas/${idea?._id}`}>
             <button className="mt-3 w-full bg-pink-500 hover:bg-pink-600 transition py-1.5 rounded-lg font-medium cursor-pointer">
               View Details
             </button>
