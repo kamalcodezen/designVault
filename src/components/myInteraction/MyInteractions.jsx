@@ -22,29 +22,6 @@ const MyInteractions = ({ userComment }) => {
     );
   }
 
-  if (!user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b]">
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-white">
-            Please Login First
-          </h2>
-
-          <p className="text-zinc-400 mt-2">
-            You need to sign in to access this page.
-          </p>
-
-          <Link
-            href="/login"
-            className="inline-block mt-5 px-5 py-2 rounded-lg bg-[#E26D8D] hover:bg-pink-600 text-white transition"
-          >
-            Login Now
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28">
       <motion.div
@@ -227,61 +204,83 @@ const MyInteractions = ({ userComment }) => {
 
                     {/* Commented Ideas List */}
                     <div>
-                      {userComment?.map((comment, index) => (
-                        <motion.div
-                          key={comment._id}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{
-                            duration: 0.4,
-                            delay: index * 0.08,
-                          }}
-                          className="flex flex-col md:flex-row gap-4 p-5 border-b border-[#4D2A2F] hover:bg-white/[0.03] transition"
-                        >
-                          {/* Image */}
-                          <div className="relative w-full md:w-40 h-28 rounded-lg overflow-hidden shrink-0">
-                            <img
-                              src={
-                                comment?.imageUrl ||
-                                "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-                              }
-                              alt={comment?.title}
-                              className="w-full h-full object-cover"
-                            />
+                      {!isPending && !user ? (
+                        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b]">
+                          <div className="text-center">
+                            <h2 className="text-2xl font-semibold text-white">
+                              Please Login First
+                            </h2>
+
+                            <p className="text-zinc-400 mt-2">
+                              You need to sign in to access this page.
+                            </p>
+
+                            <Link
+                              href="/login"
+                              className="inline-block mt-5 px-5 py-2 rounded-lg bg-[#E26D8D] hover:bg-pink-600 text-white transition"
+                            >
+                              Login Now
+                            </Link>
                           </div>
+                        </div>
+                      ) : (
+                        userComment?.map((comment, index) => (
+                          <motion.div
+                            key={comment._id}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{
+                              duration: 0.4,
+                              delay: index * 0.08,
+                            }}
+                            className="flex flex-col md:flex-row gap-4 p-5 border-b border-[#4D2A2F] hover:bg-white/[0.03] transition"
+                          >
+                            {/* Image */}
+                            <div className="relative w-full md:w-40 h-28 rounded-lg overflow-hidden shrink-0">
+                              <img
+                                src={
+                                  comment?.imageUrl?.trim()
+                                    ? comment.imageUrl
+                                    : "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                                }
+                                alt={comment?.title || "Idea"}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
 
-                          {/* Content */}
-                          <div className="flex-1">
-                            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                              <div>
-                                <h2 className="text-lg font-semibold text-white">
-                                  {comment?.title}
-                                </h2>
+                            {/* Content */}
+                            <div className="flex-1">
+                              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                                <div>
+                                  <h2 className="text-lg font-semibold text-white">
+                                    {comment?.title}
+                                  </h2>
 
-                                <p className="text-xs text-zinc-400 mt-1">
-                                  {new Date(
-                                    comment?.createdAt,
-                                  ).toLocaleDateString()}
-                                </p>
+                                  <p className="text-xs text-zinc-400 mt-1">
+                                    {new Date(
+                                      comment?.createdAt,
+                                    ).toLocaleDateString()}
+                                  </p>
+                                </div>
+
+                                <span className="w-fit px-3 py-1 rounded-full bg-[#E26D8D]/10 text-[#E26D8D] text-xs">
+                                  {comment?.category}
+                                </span>
                               </div>
 
-                              <span className="w-fit px-3 py-1 rounded-full bg-[#E26D8D]/10 text-[#E26D8D] text-xs">
-                                {comment?.category}
-                              </span>
-                            </div>
+                              <div className="mt-4 p-4 rounded-lg bg-black/20 border border-white/5">
+                                <p className="text-xs uppercase tracking-wide text-zinc-500 mb-2">
+                                  Your Comment
+                                </p>
 
-                            <div className="mt-4 p-4 rounded-lg bg-black/20 border border-white/5">
-                              <p className="text-xs uppercase tracking-wide text-zinc-500 mb-2">
-                                Your Comment
-                              </p>
-
-                              <p className="text-zinc-300 leading-relaxed">
-                                {comment?.comment}
-                              </p>
+                                <p className="text-zinc-300 leading-relaxed">
+                                  {comment?.comment}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                          </motion.div>
+                        ))
+                      )}
 
                       {userComment?.length === 0 && (
                         <div className="py-24 text-center">
