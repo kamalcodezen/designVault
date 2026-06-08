@@ -1,6 +1,7 @@
 import Banner from "@/components/home/banner/Banner";
 import FaqSection from "@/components/home/FaqSection";
 import FeaturedCategories from "@/components/home/FeaturedCategories";
+import LuxuryMarquee from "@/components/home/HeroMarquee";
 import HowItWorks from "@/components/home/HowItWorks";
 import LatestIdeas from "@/components/home/LatestIdeas";
 import NewsletterSection from "@/components/home/NewsletterSection";
@@ -20,6 +21,7 @@ export default async function Home() {
   return (
     <>
       <Banner />
+      <LuxuryMarquee />
       <TrendingIdeas ideas={ideas} />
       <FeaturedCategories />
       <WhyChooseIdeaVault />
