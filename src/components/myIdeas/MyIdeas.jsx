@@ -9,6 +9,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import DeleteIdea from "./DeleteIdeaModal";
 import MainLayoutLoading from "@/app/(main)/loading";
+import { toast } from "react-toastify";
 
 const MyIdeas = ({ myIdeas }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -106,7 +107,12 @@ const MyIdeas = ({ myIdeas }) => {
                       </Link>
 
                       <button
-                        onClick={async () => await authClient.signOut()}
+                        onClick={async () => {
+                          await authClient.signOut();
+                          toast.success(
+                            "See you soon! 👋 Logged out successfully",
+                          );
+                        }}
                         className="block text-zinc-300 hover:text-[#E26D8D] cursor-pointer"
                       >
                         Logout
@@ -167,7 +173,10 @@ const MyIdeas = ({ myIdeas }) => {
                 </Link>
 
                 <button
-                  onClick={async () => await authClient.signOut()}
+                  onClick={async () => {
+                    await authClient.signOut();
+                    toast.success("See you soon! 👋 Logged out successfully");
+                  }}
                   className="block text-zinc-300 hover:text-[#E26D8D] cursor-pointer"
                 >
                   Logout

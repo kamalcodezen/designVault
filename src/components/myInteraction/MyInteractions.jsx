@@ -5,9 +5,45 @@ import { motion } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import { toast } from "react-toastify";
+import MainLayoutLoading from "@/app/(main)/loading";
 
 const MyInteractions = ({ userComment }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data, isPending } = authClient.useSession();
+  const user = data?.user;
+
+  if (isPending) {
+    return (
+      <>
+        <MainLayoutLoading />
+      </>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b]">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-white">
+            Please Login First
+          </h2>
+
+          <p className="text-zinc-400 mt-2">
+            You need to sign in to access this page.
+          </p>
+
+          <Link
+            href="/login"
+            className="inline-block mt-5 px-5 py-2 rounded-lg bg-[#E26D8D] hover:bg-pink-600 text-white transition"
+          >
+            Login Now
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28">
@@ -88,7 +124,12 @@ const MyInteractions = ({ userComment }) => {
                       </Link>
 
                       <button
-                        onClick={async () => await authClient.signOut()}
+                        onClick={async () => {
+                          await authClient.signOut();
+                          toast.success(
+                            "See you soon! 👋 Logged out successfully",
+                          );
+                        }}
                         className="block text-zinc-300 hover:text-[#E26D8D] cursor-pointer"
                       >
                         Logout
@@ -149,7 +190,10 @@ const MyInteractions = ({ userComment }) => {
                 </Link>
 
                 <button
-                  onClick={async () => await authClient.signOut()}
+                  onClick={async () => {
+                    await authClient.signOut();
+                    toast.success("See you soon! 👋 Logged out successfully");
+                  }}
                   className="block text-zinc-300 hover:text-[#E26D8D] cursor-pointer"
                 >
                   Logout
