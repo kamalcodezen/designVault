@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { authClient } from "@/lib/auth-client";
+import UpdateIdeaModal from "./UpdateIdeaModal";
 
 const MyIdeas = ({ myIdeas }) => {
   const { data: session } = authClient.useSession();
@@ -17,7 +18,6 @@ const MyIdeas = ({ myIdeas }) => {
     <section className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28">
       <div className="w-10/12 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-6">
-
           {/* Sidebar */}
           <div className="lg:col-span-3">
             <div className="bg-[#241416]/80 border border-[#4D2A2F] rounded-lg backdrop-blur-xl p-5 sticky top-28">
@@ -139,10 +139,7 @@ const MyIdeas = ({ myIdeas }) => {
 
                     {/* Actions */}
                     <div className="flex items-center gap-4">
-                      <button className="flex items-center gap-1 text-[#E26D8D] hover:text-pink-300 transition">
-                        <MdEdit />
-                        Edit
-                      </button>
+                      <UpdateIdeaModal userIdeas={userIdeas} />
 
                       <button className="flex items-center gap-1 text-red-400 hover:text-red-300 transition">
                         <MdDelete />
