@@ -97,14 +97,15 @@ const Banner = () => {
                   </p>
 
                   <div className="mt-7 flex flex-wrap gap-4">
-                    <motion.button
-                      // whileHover={{
-                      //   scale: 1.02,
-                      // }}
-                      whileTap={{
-                        scale: 0.95,
-                      }}
-                      className="
+                    <Link href="/ideas">
+                      <motion.button
+                        // whileHover={{
+                        //   scale: 1.02,
+                        // }}
+                        whileTap={{
+                          scale: 0.95,
+                        }}
+                        className="
                           px-8
                           py-2
                           rounded-lg
@@ -114,9 +115,10 @@ const Banner = () => {
                           shadow-lg
                           shadow-[#D95C78]/30 cursor-pointer
                         "
-                    >
-                      <Link href="/ideas">Explore Ideas</Link>
-                    </motion.button>
+                      >
+                        Explore Ideas
+                      </motion.button>
+                    </Link>
 
                     <motion.button
                       // whileHover={{
@@ -221,14 +223,15 @@ const Banner = () => {
                   </p>
 
                   <div className="mt-7 flex flex-wrap gap-4">
-                    <motion.button
-                      // whileHover={{
-                      //   scale: 1.02,
-                      // }}
-                      whileTap={{
-                        scale: 0.95,
-                      }}
-                      className="
+                    <Link href="/ideas">
+                      <motion.button
+                        // whileHover={{
+                        //   scale: 1.02,
+                        // }}
+                        whileTap={{
+                          scale: 0.95,
+                        }}
+                        className="
                           px-8
                            py-2
                           rounded-lg
@@ -238,9 +241,10 @@ const Banner = () => {
                           shadow-lg
                           shadow-[#D95C78]/30 cursor-pointer
                         "
-                    >
-                      <Link href="/ideas">Explore Ideas</Link>
-                    </motion.button>
+                      >
+                        Explore Ideas
+                      </motion.button>
+                    </Link>
 
                     <motion.button
                       // whileHover={{

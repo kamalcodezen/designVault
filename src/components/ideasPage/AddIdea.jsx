@@ -13,6 +13,7 @@ const AddIdea = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   // console.log(user, "user idea");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -34,8 +35,12 @@ const AddIdea = () => {
       ...ideasData,
     };
 
+    const { data: tokenData } = await authClient.token();
+    const token = tokenData?.token;
+    
+
     try {
-      const data = await addUserIdeasData(addIdeaInfo);
+      const data = await addUserIdeasData(addIdeaInfo,token);
 
       if (data.acknowledged) {
         toast.success("Idea submitted successfully!");

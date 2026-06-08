@@ -11,11 +11,12 @@ export const allIdeasData = async () => {
 }
 
 // ideas added 
-export const addUserIdeasData = async (addIdeaInfo) => {
+export const addUserIdeasData = async (addIdeaInfo, token) => {
     const res = await fetch("http://localhost:8000/ideas", {
         method: "POST",
         headers: {
             "content-type": "application/json",
+            authorization: `Bearer ${token}`
         },
         body: JSON.stringify(addIdeaInfo),
     });
@@ -115,9 +116,13 @@ export const myIdeaDeleteData = async (id) => {
 
 
 // my interaction data access getUserCommentsData
-export const userCommentData = async (userId) => {
+export const userCommentData = async (userId, token) => {
     const res = await fetch(
-        `http://localhost:8000/comments/user/${userId}`
+        `http://localhost:8000/comments/user/${userId}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    }
     );
 
     const data = await res.json();
