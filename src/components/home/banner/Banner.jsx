@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import HeroTextSlider from "./HeroTextSlider";
 import { FaArrowRight } from "react-icons/fa6";
-
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -42,7 +42,7 @@ const Banner = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#1B1416]/20 via-[#1B1416]/20 to-transparent " />
 
             {/* Content */}
-            <div className="relative z-20 h-full max-w-11/12 mx-auto px-6 pt-22">
+            <div className="relative z-20 h-full max-w-11/12 mx-auto px-6 pt-10 sm:pt-22">
               <div className="grid lg:grid-cols-2 h-full items-center  gap-10">
                 {/* Left Side */}
                 <motion.div
@@ -115,7 +115,7 @@ const Banner = () => {
                           shadow-[#D95C78]/30 cursor-pointer
                         "
                     >
-                      Explore Ideas
+                      <Link href="/ideas">Explore Ideas</Link>
                     </motion.button>
 
                     <motion.button
@@ -166,7 +166,7 @@ const Banner = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#1B1416]/45 via-[#1B1416]/40 to-transparent " />
 
             {/* Content */}
-            <div className="relative z-20 h-full max-w-11/12 mx-auto px-6 pt-22">
+            <div className="relative z-20 h-full max-w-11/12 mx-auto px-6 pt-10 sm:pt-22">
               <div className="grid lg:grid-cols-2 h-full items-center  gap-10">
                 {/* Left Side */}
                 <motion.div
@@ -211,8 +211,6 @@ const Banner = () => {
                     </span>
                   </h2>
 
-              
-
                   <p
                     className="my-4 text-base md:text-[18px] text-gray-200
                       "
@@ -241,7 +239,7 @@ const Banner = () => {
                           shadow-[#D95C78]/30 cursor-pointer
                         "
                     >
-                      Explore Ideas
+                      <Link href="/ideas">Explore Ideas</Link>
                     </motion.button>
 
                     <motion.button
@@ -286,7 +284,7 @@ const Banner = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#1B1416]/45 via-[#1B1416]/40 to-transparent " />
 
             {/* Content */}
-            <div className="relative z-20 h-full max-w-11/12 mx-auto px-6 pt-22">
+            <div className="relative z-20 h-full max-w-11/12 mx-auto px-6 pt-10 sm:pt-22">
               <div className="grid lg:grid-cols-2 h-full items-center  gap-10">
                 {/* Left Side */}
                 <motion.div
@@ -324,7 +322,8 @@ const Banner = () => {
                   </motion.div>
 
                   <h2 className="text-4xl md:text-[55px] font-semibold ">
-                    Turn Ideas Into {" "}<span className="text-[#D95C78] italic">
+                    Turn Ideas Into{" "}
+                    <span className="text-[#D95C78] italic">
                       Successful Startups
                     </span>
                   </h2>
