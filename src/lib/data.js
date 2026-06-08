@@ -26,8 +26,12 @@ export const addUserIdeasData = async (addIdeaInfo) => {
 
 
 // ideas details data by id
-export const singleIdeaDataById = async (id) => {
-    const res = await fetch(`http://localhost:8000/ideas/${id}`)
+export const singleIdeaDataById = async (id, token) => {
+    const res = await fetch(`http://localhost:8000/ideas/${id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
     const data = await res.json()
     // console.log(data, "single") 
     return data

@@ -1,7 +1,9 @@
 import IdeasDetails from "@/components/ideasPage/IdeasDetails";
+import { auth } from "@/lib/auth";
 import { getCommentsData, singleIdeaDataById } from "@/lib/data";
+import { headers } from "next/headers";
 
-
+// generateMetadata dynamic
 export const generateMetadata = async ({ params }) => {
   const { id } = await params;
 
@@ -13,11 +15,15 @@ export const generateMetadata = async ({ params }) => {
   };
 };
 
-
 const IdeasDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const ideaData = await singleIdeaDataById(id);
+  //jwt token generate
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
+  });
+
+  const ideaData = await singleIdeaDataById(id, token);
 
   const userComment = await getCommentsData(id);
 
