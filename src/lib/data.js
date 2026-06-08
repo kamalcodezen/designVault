@@ -83,4 +83,18 @@ export const deleteComment = async (id) => {
     })
     const data = await res.json()
     return data
-} 
+}
+
+
+// my idea section edit button
+export const myIdeasUpdateData = async (id, updateData) => {
+    const res = await fetch(`http://localhost:8000/ideas/${id}`, {
+        method: "PATCH",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(updateData)
+    })
+    const data = await res.json()
+    return data;
+}

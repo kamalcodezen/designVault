@@ -1,23 +1,42 @@
-import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
-import { MdEdit } from "react-icons/md";
+"use client";
 
-const UpdateIdeaModal = ({ userIdeas }) => {
+import { myIdeasUpdateData } from "@/lib/data";
+import { Button, Label, Modal } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import { MdEdit } from "react-icons/md";
+import { toast } from "react-toastify";
+
+const UpdateIdeaModal = ({ idea }) => {
+  const router = useRouter();
+
+  const { _id } = idea;
+
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    const updateData = Object.fromEntries(formData.entries());
+    try {
+      const formData = new FormData(e.currentTarget);
+      const updateData = Object.fromEntries(formData.entries());
 
-    console.log(updateData, "updated idea");
+      const result = await myIdeasUpdateData(_id, updateData);
 
-    // update api call here
+      if (result.modifiedCount > 0) {
+        toast.success("Idea Updated Successfully ✅");
+        router.refresh();
+      } else {
+        toast.info("No changes were made.");
+      }
+    } catch (error) {
+      // console.error(error);
+      toast.error("Failed to update idea ❌");
+    }
   };
 
   return (
     <Modal>
       <Button className="bg-[#E26D8D] hover:bg-pink-600 text-white">
         <MdEdit />
-        Edit Idea
+        Edit
       </Button>
 
       <Modal.Backdrop>
@@ -40,130 +59,118 @@ const UpdateIdeaModal = ({ userIdeas }) => {
             </Modal.Header>
 
             <Modal.Body className="p-6 overflow-y-auto max-h-[70vh]">
-              <Surface variant="default" className="bg-transparent">
-                <form
-                  onSubmit={handleUpdate}
-                  className="grid md:grid-cols-2 gap-4"
-                >
-                  <TextField name="title" variant="secondary">
-                    <Label>Idea Title</Label>
-                    <Input
-                      defaultValue={userIdeas?.title}
-                      placeholder="Idea Title"
-                    />
-                  </TextField>
+              <form
+                onSubmit={handleUpdate}
+                className="grid md:grid-cols-2 gap-4"
+              >
+                <div>
+                  <Label>Idea Title</Label>
+                  <input
+                    name="title"
+                    defaultValue={idea?.title || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField name="category" variant="secondary">
-                    <Label>Category</Label>
-                    <Input
-                      defaultValue={userIdeas?.category}
-                      placeholder="Tech, AI, Health"
-                    />
-                  </TextField>
+                <div>
+                  <Label>Category</Label>
+                  <input
+                    name="category"
+                    defaultValue={idea?.category || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField name="budget" variant="secondary">
-                    <Label>Estimated Budget</Label>
-                    <Input
-                      defaultValue={userIdeas?.budget}
-                      placeholder="$5000"
-                    />
-                  </TextField>
+                <div>
+                  <Label>Budget</Label>
+                  <input
+                    name="budget"
+                    defaultValue={idea?.budget || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField name="audience" variant="secondary">
-                    <Label>Target Audience</Label>
-                    <Input
-                      defaultValue={userIdeas?.audience}
-                      placeholder="Students"
-                    />
-                  </TextField>
+                <div>
+                  <Label>Audience</Label>
+                  <input
+                    name="audience"
+                    defaultValue={idea?.audience || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField
+                <div className="md:col-span-2">
+                  <Label>Image URL</Label>
+                  <input
                     name="imageUrl"
-                    variant="secondary"
-                    className="md:col-span-2"
-                  >
-                    <Label>Image URL</Label>
-                    <Input
-                      defaultValue={userIdeas?.imageUrl}
-                      placeholder="https://..."
-                    />
-                  </TextField>
+                    defaultValue={idea?.imageUrl || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField
+                <div className="md:col-span-2">
+                  <Label>Short Description</Label>
+                  <textarea
                     name="short-description"
-                    variant="secondary"
-                    className="md:col-span-2"
-                  >
-                    <Label>Short Description</Label>
-                    <Input
-                      defaultValue={userIdeas?.["short-description"]}
-                      placeholder="Short Description"
-                    />
-                  </TextField>
+                    defaultValue={idea?.["short-description"] || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField
+                <div className="md:col-span-2">
+                  <Label>Detailed Description</Label>
+                  <textarea
                     name="detailed-description"
-                    variant="secondary"
-                    className="md:col-span-2"
-                  >
-                    <Label>Detailed Description</Label>
-                    <Input
-                      defaultValue={userIdeas?.["detailed-description"]}
-                      placeholder="Detailed Description"
-                    />
-                  </TextField>
+                    defaultValue={idea?.["detailed-description"] || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField
+                <div className="md:col-span-2">
+                  <Label>Tags</Label>
+                  <input
                     name="tags"
-                    variant="secondary"
-                    className="md:col-span-2"
-                  >
-                    <Label>Tags</Label>
-                    <Input
-                      defaultValue={userIdeas?.tags?.join(", ")}
-                      placeholder="AI, Startup, Education"
-                    />
-                  </TextField>
+                    defaultValue={
+                      Array.isArray(idea?.tags)
+                        ? idea.tags.join(", ")
+                        : idea?.tags || ""
+                    }
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField
+                <div className="md:col-span-2">
+                  <Label>Problem Statement</Label>
+                  <textarea
                     name="statement"
-                    variant="secondary"
-                    className="md:col-span-2"
-                  >
-                    <Label>Problem Statement</Label>
-                    <Input
-                      defaultValue={userIdeas?.statement}
-                      placeholder="Problem Statement"
-                    />
-                  </TextField>
+                    defaultValue={idea?.statement || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
 
-                  <TextField
+                <div className="md:col-span-2">
+                  <Label>Proposed Solution</Label>
+                  <textarea
                     name="solution"
-                    variant="secondary"
-                    className="md:col-span-2"
+                    defaultValue={idea?.solution || ""}
+                    className="w-full mt-1 px-3 py-2 rounded-lg bg-[#1B1012] border border-[#4D2A2F] text-white outline-none"
+                  />
+                </div>
+
+                <div className="md:col-span-2 flex justify-end gap-3">
+                  <Button slot="close" variant="secondary">
+                    Cancel
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    slot="close"
+                    className="bg-[#E26D8D] hover:bg-pink-600 text-white"
                   >
-                    <Label>Proposed Solution</Label>
-                    <Input
-                      defaultValue={userIdeas?.solution}
-                      placeholder="Proposed Solution"
-                    />
-                  </TextField>
-
-                  <div className="md:col-span-2 flex justify-end gap-3 pt-4">
-                    <Button slot="close" variant="secondary">
-                      Cancel
-                    </Button>
-
-                    <Button
-                      type="submit"
-                      slot="close"
-                      className="bg-[#E26D8D] hover:bg-pink-600 text-white"
-                    >
-                      Update Idea
-                    </Button>
-                  </div>
-                </form>
-              </Surface>
+                    Update Idea
+                  </Button>
+                </div>
+              </form>
             </Modal.Body>
           </Modal.Dialog>
         </Modal.Container>

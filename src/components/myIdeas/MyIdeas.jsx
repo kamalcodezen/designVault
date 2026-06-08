@@ -113,8 +113,8 @@ const MyIdeas = ({ myIdeas }) => {
                     {/* Image */}
                     <div className="relative w-full md:w-28 h-20 rounded-lg overflow-hidden">
                       <Image
-                        src={idea.imageUrl}
-                        alt={idea.title}
+                        src={idea?.imageUrl || "/placeholder.jpg"}
+                        alt={idea?.title || "Idea"}
                         fill
                         className="object-cover"
                       />
@@ -139,8 +139,10 @@ const MyIdeas = ({ myIdeas }) => {
 
                     {/* Actions */}
                     <div className="flex items-center gap-4">
-                      <UpdateIdeaModal userIdeas={userIdeas} />
+                      {/* edit */}
+                      <UpdateIdeaModal idea={idea} />
 
+                      {/* delete */}
                       <button className="flex items-center gap-1 text-red-400 hover:text-red-300 transition">
                         <MdDelete />
                         Delete
