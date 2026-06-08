@@ -24,10 +24,10 @@ const Footer = () => {
           <div>
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 rounded-2xl bg-[#D95C78] flex items-center justify-center shadow-lg shadow-[#D95C78]/30">
-                <span className="font-bold text-white text-lg">D</span>
+                <span className="font-bold text-white text-lg">I</span>
               </div>
 
-              <h2 className="text-2xl font-bold text-[#FFF4F5]">DesignVault</h2>
+              <h2 className="text-2xl font-bold text-[#FFF4F5]">IdeaVault</h2>
             </div>
 
             <p className="mt-5 text-sm leading-relaxed text-[#FFF4F5]/60">

@@ -1,4 +1,5 @@
 import Banner from "@/components/home/banner/Banner";
+import FaqSection from "@/components/home/FaqSection";
 import FeaturedCategories from "@/components/home/FeaturedCategories";
 import HowItWorks from "@/components/home/HowItWorks";
 import LatestIdeas from "@/components/home/LatestIdeas";
@@ -28,6 +29,7 @@ export default async function Home() {
       <TopContributors />
       <CommunityTestimonials />
       <NewsletterSection />
+      <FaqSection />
     </>
   );
 }
