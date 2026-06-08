@@ -6,8 +6,12 @@ import { motion } from "framer-motion";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { authClient } from "@/lib/auth-client";
 import UpdateIdeaModal from "./UpdateIdeaModal";
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 
 const MyIdeas = ({ myIdeas }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
@@ -18,9 +22,89 @@ const MyIdeas = ({ myIdeas }) => {
     <section className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28">
       <div className="w-10/12 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-6">
-          {/* Sidebar */}
-          <div className="lg:col-span-3">
-            <div className="bg-[#241416]/80 border border-[#4D2A2F] rounded-lg backdrop-blur-xl p-5 sticky top-28">
+          
+          {/* MOBILE MENU */}
+          <div className="lg:hidden mb-6">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex w-full items-center justify-between rounded-lg bg-[#241416]/80 border border-[#4D2A2F] px-4 py-3 text-white backdrop-blur-xl"
+            >
+              <span className="font-semibold">DesignVault Menu</span>
+
+              <motion.span
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                ▼
+              </motion.span>
+            </button>
+
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-2 rounded-lg bg-[#241416]/90 border border-[#4D2A2F] p-4 backdrop-blur-xl">
+                    <div className="space-y-3 text-sm">
+                      <Link
+                        href="/"
+                        className="block text-zinc-300 hover:text-[#E26D8D] transition"
+                      >
+                        Dashboard
+                      </Link>
+
+                      <Link
+                        href="/add-idea"
+                        className="block text-zinc-300 hover:text-[#E26D8D] transition"
+                      >
+                        Add Idea
+                      </Link>
+
+                      <Link
+                        href="/my-idea"
+                        className="block text-[#E26D8D] font-medium"
+                      >
+                        My Ideas
+                      </Link>
+
+                      <Link
+                        href="/my-interactions"
+                        className="block text-zinc-300 hover:text-[#E26D8D] transition"
+                      >
+                        My Interactions
+                      </Link>
+
+                      <Link
+                        href="/profile"
+                        className="block text-zinc-300 hover:text-[#E26D8D] transition"
+                      >
+                        Profile
+                      </Link>
+
+                      <Link
+                        href="/settings"
+                        className="block text-zinc-300 hover:text-[#E26D8D] transition"
+                      >
+                        Settings
+                      </Link>
+
+                      <button className="block text-zinc-300 hover:text-red-400 transition cursor-pointer">
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* desktop Sidebar */}
+          <div className="hidden lg:block lg:col-span-3">
+            <div className=" bg-[#241416]/80 border border-[#4D2A2F] rounded-lg backdrop-blur-xl p-5 sticky top-28">
               <h2 className="text-lg font-semibold mb-6">DesignVault</h2>
 
               <div className="space-y-4 text-sm">
