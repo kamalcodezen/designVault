@@ -110,4 +110,13 @@ export const myIdeaDeleteData = async (id) => {
 }
 
 
-// m
+// my interaction data access getUserCommentsData
+export const userCommentData = async (userId) => {
+    const res = await fetch(
+        `http://localhost:8000/comments/user/${userId}`
+    );
+
+    const data = await res.json();
+    console.log(data, "comment data")
+    return data
+};
