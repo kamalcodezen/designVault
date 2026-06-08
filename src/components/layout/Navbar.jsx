@@ -55,7 +55,7 @@ const Navbar = () => {
               className="text-3xl font-semibold flex items-center "
               title="Home"
             >
-              Design<span className="text-[#D95C78]">Vault</span>
+              Idea<span className="text-[#D95C78]">Vault</span>
             </p>
           </Link>
 

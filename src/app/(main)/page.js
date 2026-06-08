@@ -1,5 +1,6 @@
 import Banner from "@/components/home/banner/Banner";
 import FeaturedCategories from "@/components/home/FeaturedCategories";
+import HowItWorks from "@/components/home/HowItWorks";
 import LatestIdeas from "@/components/home/LatestIdeas";
 import TrendingIdeas from "@/components/home/TrendingIdeas";
 import WhyChooseIdeaVault from "@/components/home/WhyChooseIdeaVault";
@@ -23,7 +24,7 @@ export default async function Home() {
       <FeaturedCategories />
       <WhyChooseIdeaVault />
       <LatestIdeas ideas={ideas} />
-
+      <HowItWorks />
 
       <Footer />
     </>
