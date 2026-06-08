@@ -45,7 +45,7 @@ const categories = [
 
 const FeaturedCategories = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-[#140d0d] via-[#1b1012] to-[#140d0d]">
+    <section className="py-14 bg-gradient-to-b from-[#140d0d] via-[#1b1012] to-[#140d0d]">
       <div className="w-11/12 max-w-7xl mx-auto">
         {/* heading */}
 
