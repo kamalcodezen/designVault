@@ -25,7 +25,6 @@ const MyIdeas = ({ myIdeas }) => {
     );
   }
 
-
   const userIdeas =
     myIdeas?.filter((idea) => idea?.userEmail === user?.email) || [];
 
@@ -229,6 +228,8 @@ const MyIdeas = ({ myIdeas }) => {
                     </div>
                   </div>
                 ) : (
+                  !isPending &&
+                  user &&
                   userIdeas?.map((idea, index) => (
                     <motion.div
                       key={idea._id}

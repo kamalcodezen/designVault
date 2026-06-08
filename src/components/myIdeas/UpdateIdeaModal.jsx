@@ -34,10 +34,12 @@ const UpdateIdeaModal = ({ idea }) => {
 
   return (
     <Modal>
-      <button className="flex items-center gap-1 text-red-400 hover:text-red-300 transition cursor-pointer">
-        <MdEdit />
-        Edit
-      </button>
+      <Modal.Trigger>
+        <button className="flex items-center gap-1 text-red-400 hover:text-red-300 transition cursor-pointer">
+          <MdEdit />
+          Edit
+        </button>
+      </Modal.Trigger>
 
       <Modal.Backdrop>
         <Modal.Container placement="auto">

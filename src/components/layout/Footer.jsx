@@ -101,7 +101,7 @@ const Footer = () => {
               </Link>
 
               <Link
-                href="/my-ideas"
+                href="/my-idea"
                 className="text-[#FFF4F5]/60 hover:text-[#F29BAE] transition"
               >
                 My Ideas
@@ -129,14 +129,14 @@ const Footer = () => {
               </Link>
 
               <Link
-                href="/support"
+                href="/"
                 className="text-[#FFF4F5]/60 hover:text-[#F29BAE] transition"
               >
                 Support
               </Link>
 
               <Link
-                href="/contact"
+                href="/"
                 className="text-[#FFF4F5]/60 hover:text-[#F29BAE] transition"
               >
                 Contact
@@ -149,7 +149,7 @@ const Footer = () => {
             <h3 className="text-[#FFF4F5] font-semibold mb-5">Contact Info</h3>
 
             <div className="space-y-3 text-[#FFF4F5]/60">
-              <p> support@designvault.com</p>
+              <p> kamaluddin7908@gmail.com</p>
 
               <p> Delhi, India</p>
 
@@ -178,7 +178,7 @@ const Footer = () => {
           "
         >
           <p className="text-sm text-[#FFF4F5]/40">
-            © 2026 DesignVault. All rights reserved.
+            © 2026 IdeaVault. All rights reserved.
           </p>
 
           <p className="text-sm text-[#FFF4F5]/40">

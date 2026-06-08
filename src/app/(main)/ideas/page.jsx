@@ -1,4 +1,5 @@
 import AllIdeas from "@/components/ideasPage/AllIdeas";
+import { allIdeasData } from "@/lib/data";
 
 export const metadata = {
   title: "Ideas IdeaVault",
@@ -7,12 +8,15 @@ export const metadata = {
 
 
 
-const AllIdeasPage = () => {
+const AllIdeasPage =async () => {
+
+  const ideas = await allIdeasData();
   return (
     <div className="min-h-screen">
-      <AllIdeas />
+      <AllIdeas initialIdeas={ideas} />
     </div>
   );
 };
 
 export default AllIdeasPage;
+

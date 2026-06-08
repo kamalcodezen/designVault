@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import ThemeToggle from "@/theme/ThemeToggle";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -58,6 +59,8 @@ const Navbar = () => {
               Idea<span className="text-[#D95C78]">Vault</span>
             </p>
           </Link>
+
+          {/* <ThemeToggle /> */}
 
           <div className="hidden md:flex gap-5 text-[17px]">
             {links.map((link, ind) => {
