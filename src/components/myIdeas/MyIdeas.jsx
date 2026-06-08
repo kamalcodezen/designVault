@@ -8,6 +8,8 @@ import { authClient } from "@/lib/auth-client";
 import UpdateIdeaModal from "./UpdateIdeaModal";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import DeleteIdea from "./DeleteIdeaModal";
+import { myIdeaDeleteData } from "@/lib/data";
 
 const MyIdeas = ({ myIdeas }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -228,11 +230,8 @@ const MyIdeas = ({ myIdeas }) => {
                       {/* edit */}
                       <UpdateIdeaModal idea={idea} />
 
-                      {/* delete */}
-                      <button className="flex items-center gap-1 text-red-400 hover:text-red-300 transition">
-                        <MdDelete />
-                        Delete
-                      </button>
+                      {/*  delete modal */}
+                      <DeleteIdea idea={idea} />
                     </div>
                   </motion.div>
                 ))}

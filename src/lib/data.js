@@ -98,3 +98,13 @@ export const myIdeasUpdateData = async (id, updateData) => {
     const data = await res.json()
     return data;
 }
+
+// my idea page section DELETE idea
+export const myIdeaDeleteData = async (id) => {
+
+    const res = await fetch(`http://localhost:8000/ideas/${id}`, {
+        method: "DELETE",
+    })
+    const data = await res.json()
+    return data
+}
