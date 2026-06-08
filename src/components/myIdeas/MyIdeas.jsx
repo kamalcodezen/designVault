@@ -22,7 +22,6 @@ const MyIdeas = ({ myIdeas }) => {
     <section className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28">
       <div className="w-10/12 max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-6">
-          
           {/* MOBILE MENU */}
           <div className="lg:hidden mb-6">
             <button
@@ -92,7 +91,10 @@ const MyIdeas = ({ myIdeas }) => {
                         Settings
                       </Link>
 
-                      <button className="block text-zinc-300 hover:text-red-400 transition cursor-pointer">
+                      <button
+                        onClick={async () => await authClient.signOut()}
+                        className="block text-zinc-300 hover:text-[#E26D8D] cursor-pointer"
+                      >
                         Logout
                       </button>
                     </div>
@@ -151,7 +153,7 @@ const MyIdeas = ({ myIdeas }) => {
                 </Link>
 
                 <button
-                  href="/logout"
+                  onClick={async () => await authClient.signOut()}
                   className="block text-zinc-300 hover:text-[#E26D8D] cursor-pointer"
                 >
                   Logout

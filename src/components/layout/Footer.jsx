@@ -12,7 +12,7 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-[#1B1416] border-t border-white/10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="w-full  px-10 mx-auto  py-16">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
