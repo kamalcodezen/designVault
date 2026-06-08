@@ -17,11 +17,37 @@ const MyIdeas = ({ myIdeas }) => {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
+  const { data, isPending } = authClient.useSession();
+  const user = data?.user;
+
   if (isPending) {
     return (
       <>
         <MainLayoutLoading />
       </>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b]">
+        <div className="text-center">
+          <h2 className="text-2xl font-semibold text-white">
+            Please Login First
+          </h2>
+
+          <p className="text-zinc-400 mt-2">
+            You need to sign in to access this page.
+          </p>
+
+          <Link
+            href="/login"
+            className="inline-block mt-5 px-5 py-2 rounded-lg bg-[#E26D8D] hover:bg-pink-600 text-white transition"
+          >
+            Login Now
+          </Link>
+        </div>
+      </div>
     );
   }
 
