@@ -159,15 +159,19 @@ const UpdateIdeaModal = ({ idea }) => {
                   />
                 </div>
 
-                <div className="md:col-span-2 flex justify-end gap-3">
-                  <Button slot="close" variant="secondary">
+                <div className="md:col-span-2 flex justify-end gap-3 ">
+                  <Button
+                    className="cursor-pointer"
+                    slot="close"
+                    variant="secondary"
+                  >
                     Cancel
                   </Button>
 
                   <Button
                     type="submit"
                     slot="close"
-                    className="bg-[#E26D8D] hover:bg-pink-600 text-white"
+                    className="bg-[#E26D8D] hover:bg-pink-600 text-white cursor-pointer"
                   >
                     Update Idea
                   </Button>

@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${urban.variable}  ${poppins.variable} ${siliguri.variable} h-full antialiased`}
+      className={`${urban.variable}  ${poppins.variable} ${siliguri.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
         <main className="min-h-screen">

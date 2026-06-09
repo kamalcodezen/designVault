@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MdDelete, MdDeleteForever } from "react-icons/md";
-import {  myIdeaDeleteData } from "@/lib/data";
+import { myIdeaDeleteData } from "@/lib/data";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,6 @@ const DeleteIdea = ({ idea }) => {
   const router = useRouter();
 
   const handleDelete = async () => {
-
     try {
       const result = await myIdeaDeleteData(idea._id);
 
@@ -70,14 +69,14 @@ const DeleteIdea = ({ idea }) => {
                 <div className="flex gap-3 mt-6">
                   <button
                     onClick={() => setIsDeleteOpen(false)}
-                    className="flex-1 py-2 rounded-lg bg-white/10 text-white"
+                    className="flex-1 py-2 rounded-lg bg-white/10 text-white cursor-pointer"
                   >
                     Cancel
                   </button>
 
                   <button
                     onClick={handleDelete}
-                    className="flex-1 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white"
+                    className="flex-1 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white cursor-pointer"
                   >
                     Delete
                   </button>

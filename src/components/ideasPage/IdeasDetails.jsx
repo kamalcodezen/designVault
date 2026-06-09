@@ -81,7 +81,7 @@ const IdeasDetails = ({ ideaData, userComment }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="w-9/12 max-w-7xl mx-auto">
+      <div className="w-10/12 md:w-9/12  mx-auto">
         {/* Back Button */}
         <Link
           href="/ideas"

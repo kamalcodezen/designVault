@@ -7,6 +7,10 @@
   --font-body: var(--font-siliguri);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* =========================
 BASE
 ========================= */

@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 left-0  w-full z-50">
       {/* left side */}
-      <div className=" w-full mx-auto px-10 py-4 flex justify-between items-center text-white">
+      <div className="  w-full mx-auto px-3 sm:px-10 py-4 flex justify-between items-center text-white">
         <div className="flex items-center justify-center gap-8">
           {/* logo */}
           <Link href={"/"}>

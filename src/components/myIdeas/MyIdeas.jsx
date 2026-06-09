@@ -11,7 +11,7 @@ import DeleteIdea from "./DeleteIdeaModal";
 import MainLayoutLoading from "@/app/(main)/loading";
 import { toast } from "react-toastify";
 
-const MyIdeas = ({ myIdeas }) => {
+const MyIdeas = ({  userIdeas }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: session, isPending } = authClient.useSession();
@@ -25,8 +25,8 @@ const MyIdeas = ({ myIdeas }) => {
     );
   }
 
-  const userIdeas =
-    myIdeas?.filter((idea) => idea?.userEmail === user?.email) || [];
+  // const userIdeas =
+  //   myIdeas?.filter((idea) => idea?.userEmail === user?.email) || [];
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-[#140d0d] via-[#2a1618] to-[#120b0b] text-white py-28">

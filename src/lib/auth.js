@@ -2,8 +2,7 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { jwt } from "better-auth/plugins";
-import { PiStrategy } from "react-icons/pi";
-import { getMaxAge } from "next/dist/server/image-optimizer";
+
 
 const client = new MongoClient(process.env.MONGO_DB_URI);
 const db = client.db("ideaVault");

@@ -22,7 +22,7 @@ const SearchIdea = ({ setIdeas }) => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:8000/ideas?search=${searchTerm}&category=${selectedCategory}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/ideas?search=${searchTerm}&category=${selectedCategory}`,
     )
       .then((res) => res.json())
       .then((data) => setIdeas(data));
